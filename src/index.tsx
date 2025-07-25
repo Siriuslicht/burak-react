@@ -1,4 +1,3 @@
-console.log("Component based Declarative Single Page Application");
 
 import React from "react";
 import { createRoot} from "react-dom/client";
@@ -34,3 +33,4 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals(); 
 console.log("React");
+console.log("Component based Declarative Single Page Application");
