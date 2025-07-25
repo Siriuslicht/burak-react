@@ -1,32 +1,23 @@
 import React from "react";
 import "../css/app.css";
 import {Box, Button, Container, Stack, Typography } from "@mui/material";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, useLocation } from "react-router-dom";
 import { HomePage } from "./screens/homePage";
 import { ProductsPage } from "./screens/productsPage";
 import { OrdersPage } from "./screens/ordersPage";
 import { UsersPage } from "./screens/userPage";
+import { HomeNavbar } from "./components/headers/HomeNavbar";
+import { OtherNavbar } from "./components/headers/OtherNavbar";
+import { Footer } from "./components/footer";
 
 function App() {
+
+  const location = useLocation();
+  console.log("locati on:", location);
+
   return (
-    <div>
-        <nav>
-          <ul>
-           <li>
-              <Link to="/products">ProductsPage</Link>
-            </li>
-            <li>
-              <Link to="/products">ProductsPage</Link>
-            </li>
-            <li>
-              <Link to="/orders">OrdersPage</Link>
-            </li>
-            <li>
-              <Link to="/member-page">UsersPage</Link>
-            </li>
-          </ul>
-        </nav>
-  
+    <>
+        {location.pathname === "/" ? <HomeNavbar/> : <OtherNavbar/>}
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
@@ -35,7 +26,7 @@ function App() {
           </Route>
           <Route path="/orders">
             <OrdersPage />
-          </Route>
+          </Route> 
           <Route path="/member-page">
             <UsersPage />
           </Route>
@@ -43,7 +34,8 @@ function App() {
             <HomePage />
           </Route>
         </Switch>
-      </div>
+          <Footer />
+      </>
   );
 }
 

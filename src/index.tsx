@@ -1,3 +1,5 @@
+console.log("Component based Declarative Single Page Application");
+
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -11,7 +13,7 @@ import theme from "./app/MaterialTheme";
 import { BrowserRouter as Router } from "react-router-dom";
 
 
-ReactDOM.render(
+ReactDOM.render( 
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
