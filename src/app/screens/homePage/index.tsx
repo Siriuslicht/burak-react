@@ -6,6 +6,7 @@ import { Events } from "./Events";
 import { NewDishes } from "./NewDIshes";
 import Statistics from "./Statistics";
 import { PopularDishes } from "./PopularDishes";
+import "../../../css/home.css";
 
 export default function HomePage() {
   return <div className={"homepage"}>
