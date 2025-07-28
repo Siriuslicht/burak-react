@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, CardContent, Container, Stack } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import { CssVarsProvider } from "@mui/joy/styles";
-import { CardCover, CardOverflow } from "@mui/joy";
+import { CardOverflow } from "@mui/joy";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
