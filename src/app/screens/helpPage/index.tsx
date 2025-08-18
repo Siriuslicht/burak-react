@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import { Box, Container, Stack, Tabs } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Tab from "@mui/material/Tab";
@@ -55,7 +55,7 @@ export default function HelpPage() {
                   {faq.map((value, number) => {
                     return (
                       <Accordion key={number}>
-                        <AccordionSummary
+                        <AccordionSummary 
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1a-content"
                           id="panel1a-header"
