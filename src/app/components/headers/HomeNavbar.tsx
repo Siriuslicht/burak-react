@@ -26,13 +26,13 @@ export default function HomeNavbar() {
                   </NavLink>  
                </Box>
             <Stack className="links">
-
+ 
                <Box className={"hover-line"}>
                   <NavLink to="/" activeClassName={"underline"}>Home</NavLink>  
                </Box>
 
                <Box className={"hover-line"}>
-                  <NavLink to="/products" activeClassName={"underline"}>Products</NavLink>  
+                  <NavLink to="/products" activeClassName={"underline"}>Products</NavLink> 
                </Box>
 
             {authMember ? (
