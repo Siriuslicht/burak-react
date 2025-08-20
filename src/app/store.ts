@@ -1,8 +1,11 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import HomePage from "./screens/homePage";
+import { configureStore, ThunkAction, Action,  } from "@reduxjs/toolkit";
 import HomePageReducer from "./screens/homePage/slice";
+import reduxLogger from "redux-logger";
 
 export const store = configureStore({
+  middleware: (getDefaultMiddleware) => 
+    // @ts-ignore
+    getDefaultMiddleware().concat(reduxLogger),
   reducer: {
     homePage: HomePageReducer 
   },
