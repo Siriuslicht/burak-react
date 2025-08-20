@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "@mui/material";
 import { Advertisement } from "./Advertisement";
 import { ActiveUsers } from "./ActiveUsers";
@@ -9,6 +9,13 @@ import { PopularDishes } from "./PopularDishes";
 import "../../../css/home.css";
 
 export default function HomePage() {
+
+  useEffect(() => {
+    //Backend server data request => Data
+
+    // slice: Data =>  
+  }, []);
+
   return <div className={"homepage"}>
     <Statistics />
     <PopularDishes />

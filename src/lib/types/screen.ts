@@ -3,11 +3,12 @@ import { Product } from "./product";
 
 /** REACT APP STATE **/
 export interface AppRootState {
-   homaPage: HomePageState;
+   homePage: HomePageState;
 }
 
+/** HOMEPAGE */
 export interface HomePageState {
-   PopularDishes: Product[];
+   popularDishes: Product[];
    newDishes: Product[];
    topUsers: Member[];
 }
