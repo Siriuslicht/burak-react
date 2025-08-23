@@ -27,6 +27,10 @@ const popularDishesRetriever = createSelector(
 
 export default function HomePage() {
 
+   /** Run qilinganda Frontga Env-Varlar yuklanadi!!! */
+  console.log("Back Url:", process.env.REACT_APP_API_URL);
+  /** => Lib faylini ichidan React projectining configurationini hosil qilish kerak!!! */
+
   const { setPopularDishes } = actionDispatch(useDispatch());
   const { popularDishes } = useSelector(popularDishesRetriever);
   useEffect(() => {}, []);
