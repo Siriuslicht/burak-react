@@ -1,17 +1,23 @@
-import React from "react";
 import { Container, Stack } from "@mui/material";
 import { CssVarsProvider, Typography } from "@mui/joy";
 import { AspectRatio, Box, CardOverflow } from "@mui/joy";
 import Card from "@mui/joy/Card";
 
-const activeUsers = [
-   {memberNick: "Martin", memberImage: "/img/martin.webp"},
-   {memberNick: "Justin", memberImage: "/img/justin.webp"},
-   {memberNick: "Rose", memberImage: "/img/rose.webp"},
-   {memberNick: "Nusret", memberImage: "/img/nusret.webp"},
-]
+import {  useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveTopUsers } from "./selector";
+import { serverApi } from "../../../lib/config";
+import { Member } from "../../../lib/types/member";
+
+
+const topUsersRetriever = createSelector(
+  retrieveTopUsers,
+  (topUsers) => ({ topUsers })
+)
+
 
 export function ActiveUsers() {
+      const { topUsers } = useSelector(topUsersRetriever)
    return (
       <div className={"active-users-frame"}>
          <Container>
@@ -20,18 +26,19 @@ export function ActiveUsers() {
                <Stack className={"cards-frame"}>
 
                   <CssVarsProvider>
-                     {activeUsers.length !== 0 ? (
-                        activeUsers.map((ele, index) => {
+                     {topUsers.length !== 0 ? (
+                        topUsers.map((member: Member) => {
+                           const imagePath = `${serverApi}/${member.memberImage}`;
                            return (
-                              <Card key={index} className="card" >
+                              <Card key={member._id} className="card" >
                                  <CardOverflow> 
                                    <AspectRatio ratio="1" >
-                                      <img src={ele.memberImage} alt="" />
+                                      <img src={imagePath} alt="" />
                                    </AspectRatio>
                                 </CardOverflow>
 
                                 <Typography className={"member-nickname"}>
-                                  {ele.memberNick}
+                                  {member.memberNick}
                                 </Typography>
                               </Card>
                            )

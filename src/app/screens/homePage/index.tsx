@@ -10,17 +10,18 @@ import "../../../css/home.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch} from "@reduxjs/toolkit";
-import { createSelector } from "reselect";
-import { setNewDishes, setPopularDishes } from "./slice";
-import { retrieveNewDishes, retrievePopularDishes } from "./selector";
+import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
 import { Product } from "../../../lib/types/product";
 import ProductService from "../../services/Product.service";
 import { ProductCollection } from "../../../lib/enums/product.enum";
+import MemberService from "../../services/Member.service";
+import { Member } from "../../../lib/types/member";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
+  setTopUsers: (data: Member[]) => dispatch(setTopUsers),
 });
 
 
@@ -50,6 +51,11 @@ export default function HomePage() {
       // productCollection: ProductCollection.DISH,
     }).then(data => {
       setNewDishes(data);
+    }).catch(err => console.log(err));
+
+    const member = new MemberService();
+    member.getTopUsers().then(data => {
+      setTopUsers(data);
     }).catch(err => console.log(err));
 }, []);
 
