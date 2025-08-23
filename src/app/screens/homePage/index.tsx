@@ -14,26 +14,35 @@ import { createSelector } from "reselect";
 import { setPopularDishes } from "./slice";
 import { retrieveNewDishes, retrievePopularDishes } from "./selector";
 import { Product } from "../../../lib/types/product";
+import ProductService from "../../services/Product.service";
+import { ProductCollection } from "../../../lib/enums/product.enum";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
 });
-const popularDishesRetriever = createSelector(
-  retrievePopularDishes,
-  (popularDishes) => ({ popularDishes })
-)
 
 
 export default function HomePage() {
-
    /** Run qilinganda Frontga Env-Varlar yuklanadi!!! */
   console.log("Back Url:", process.env.REACT_APP_API_URL);
   /** => Lib faylini ichidan React projectining configurationini hosil qilish kerak!!! */
 
   const { setPopularDishes } = actionDispatch(useDispatch());
-  const { popularDishes } = useSelector(popularDishesRetriever);
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+     const product = new ProductService();
+    product.getProducts({
+      page: 1,
+      limit: 4,
+      order: "productView",
+      productCollection: ProductCollection.DISH,
+    }).then(data => {
+      console.log("data passed here:", data)
+      setPopularDishes(data);
+    }).catch(err => console.log(err));
+     
+}, []);
 
   return <div className={"homepage"}>
     <Statistics />
@@ -44,3 +53,6 @@ export default function HomePage() {
     <Events />
   </div>
 }
+
+
+
