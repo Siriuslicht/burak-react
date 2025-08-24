@@ -19,9 +19,7 @@ class ProductService {
 
          /** RestAPI ning methodi get bo'lganligi uchun 
           * axiosning get() methodidan foydalanaman */
-         const result = await axios.get(url)
-
-         console.log("getProduts:", result);
+         const result = await axios.get(url);
 
          return result.data;
 

@@ -17,7 +17,8 @@ const topUsersRetriever = createSelector(
 
 
 export function ActiveUsers() {
-      const { topUsers } = useSelector(topUsersRetriever)
+      const { topUsers } = useSelector(topUsersRetriever);
+      console.log("this activeUsers:", topUsers);
    return (
       <div className={"active-users-frame"}>
          <Container>

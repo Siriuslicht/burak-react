@@ -8,8 +8,8 @@ import Statistics from "./Statistics";
 import { PopularDishes } from "./PopularDishes";
 import "../../../css/home.css";
 
-import { useDispatch, useSelector } from "react-redux";
-import { Dispatch} from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
 import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
 import { Product } from "../../../lib/types/product";
 import ProductService from "../../services/Product.service";
@@ -21,7 +21,7 @@ import { Member } from "../../../lib/types/member";
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
-  setTopUsers: (data: Member[]) => dispatch(setTopUsers),
+  setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });
 
 
@@ -30,7 +30,12 @@ export default function HomePage() {
   console.log("Back Url:", process.env.REACT_APP_API_URL);
   /** => Lib faylini ichidan React projectining configurationini hosil qilish kerak!!! */
 
-  const { setPopularDishes, setNewDishes } = actionDispatch(useDispatch());
+  const { setPopularDishes, setNewDishes, setTopUsers } = actionDispatch(useDispatch());
+  /**
+   * const { setPopularDishes, setNewDishes } = actionDispatch(useDispatch());
+      You’re also calling setTopUsers inside useEffect, but you never actually pulled it out of actionDispatch.
+      So setTopUsers is undefined when you call it — that’s why nothing gets dispatched to Redux, and ActiveUsers ends up with an empty array.
+   */
 
   useEffect(() => {
      const product = new ProductService();
@@ -40,7 +45,6 @@ export default function HomePage() {
       order: "productView",
       productCollection: ProductCollection.DISH,
     }).then(data => {
-      console.log("data passed here:", data)
       setPopularDishes(data);
     }).catch(err => console.log(err));
      

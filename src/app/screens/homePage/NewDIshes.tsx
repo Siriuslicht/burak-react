@@ -22,7 +22,7 @@ const newDishesRetriever = createSelector(
 
 export function NewDishes(){
         const { newDishes } = useSelector(newDishesRetriever);
-       console.log("popularDishes:", newDishes);
+       console.log("this newDishes", newDishes);
    return (
       <div className={"new-products-frame"}>
          <Container>
@@ -33,7 +33,7 @@ export function NewDishes(){
                   {newDishes.length !== 0 ? (
                      newDishes.map((product) => {
                         const imagePath = `${serverApi}/${product.productImages[0]}`;
-                          const sizeVolume = product.productCollection === ProductCollection.DISH ? product.productVolume + " l" : product.productSize + " size";
+                          const sizeVolume = product.productCollection === ProductCollection.DISH ? product.productSize + " size" : product.productVolume + " l";
                        return (
                              <Card key={product._id} variant="outlined" className={"card"}>
                                 <CardOverflow> 
