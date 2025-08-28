@@ -11,8 +11,8 @@ const homePageSlice = createSlice({
    name: "homePage",
    initialState,
    reducers: {
-       setPopularDishes: (state, action) => {
-         state.popularDishes = action.payload;
+       setPopularDishes: (state, normat) => {
+         state.popularDishes = normat.payload; 
        },
        setNewDishes: (state, action) => {
          state.newDishes = action.payload;
