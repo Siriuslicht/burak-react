@@ -14,7 +14,7 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setProducts, setChosenProduct, setRestaurant } from "./slice";
+import { setChosenProduct, setRestaurant } from "./slice";
 import { Product } from "../../../lib/types/product";
 import { createSelector } from "reselect";
 import { retrieveChosenProduct, retrieveProducts, retrieveRestaurant } from "./selector";

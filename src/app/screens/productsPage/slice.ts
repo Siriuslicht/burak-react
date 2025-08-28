@@ -5,7 +5,7 @@ const initialState: ProductsPageState = {
    restaurant: null,
    chosenProduct: null,
    products: []
-} 
+};
 
 const productsPageSlice = createSlice({
    name: "productsPage",
