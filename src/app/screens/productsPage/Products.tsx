@@ -187,21 +187,23 @@ export default function Products(props: ProductsProps) {
                                     <button className={"product-sale-button"}
                                     
                                     >{sizeVolume}</button></div>
-                                 <Button className={"shop-btn"}>
+                                 <Button className={"shop-btn"}
+                                 onClick={(e) => {
+                                    onAdd({
+                                       _id: product._id,
+                                       quantity: 1,
+                                       name: product.productName,
+                                       price: product.productPrice,
+                                       image: product.productImages[0]
+                                    });
+                                    e.stopPropagation();
+                                 }}
+                                 >
                                     <img
                                        src={"/icons/shopping-cart.svg"}
                                        className={"korzinka"}
                                        style={{display: "flex"}}
-                                       onClick={(e) => {
-                                          onAdd({
-                                             _id: product._id,
-                                             quantity: 1,
-                                             name: product.productName,
-                                             price: product.productPrice,
-                                             image: product.productImages[0]
-                                          });
-                                          e.stopPropagation();
-                                       }}
+                                       
                                     />
                                  </Button>
                                  <Button className={"view-btn"} sx={{ left: "40px",
