@@ -23,6 +23,7 @@ import ProductService from "../../services/Product.service";
 import MemberService from "../../services/Member.service";
 import { Member } from "../../../lib/types/member";
 import { serverApi } from "../../../lib/config";
+import { CartItem } from "../../../lib/types/search";
 
 
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -39,7 +40,13 @@ const restaurantRetriever = createSelector(
   (restaurant) => ({ restaurant })
 )
 
-export default function ChosenProduct() {
+interface ChosenProductProps {
+  onAdd: (item: CartItem) => void;
+}
+
+
+export default function ChosenProduct(props: ChosenProductProps) {
+  const { onAdd } = props;
   const {productId} = useParams<{productId: string}>();
     const { setRestaurant, setChosenProduct } = actionDispatch(useDispatch());
 
