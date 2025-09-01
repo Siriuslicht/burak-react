@@ -19,6 +19,14 @@ function App() {
   const location = useLocation();
 
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll, } = useBasket();
+  const [ signupOpen, setSignupOpen ] = useState<boolean>(true);
+  const [loginOpen, setLoginOpen ] = useState<boolean>(false);
+
+
+  /** HANDLERS */
+
+  const handleSignupClose = () => setSignupOpen(false);
+  const handleLoginClose = () => setLoginOpen(false);
   
   return (
     <>
@@ -47,6 +55,14 @@ function App() {
           </Route>
         </Switch>
           <Footer />
+
+
+        <AuthonticationModal
+          signupOpen={signupOpen}
+          loginOpen={loginOpen}
+          handleSignupClose={handleSignupClose}
+          handleLoginClose={handleLoginClose}
+          />
       </>
   );
 }
