@@ -1,14 +1,12 @@
 import axios from "axios";
 import { serverApi } from "../../lib/config";
-import { Member } from "../../lib/types/member";
+import { Member, MemberInput } from "../../lib/types/member";
 import { setDefaultResultOrder } from "dns";
 
 class MemberService{
-   getMember() {
-     throw new Error("Method not implemented.");
-   }
+   
    private readonly path: string;
-
+   
    constructor() {
       this.path = serverApi;
    }
@@ -17,9 +15,7 @@ class MemberService{
       try {
          const url = this.path + "/member/top-users";
          const result = await axios.get(url);
-
          return result.data;
-           
       } catch (err) {
          console.log("Error, getTopUsers :", err);
          throw err;
@@ -30,17 +26,30 @@ class MemberService{
       try {
          const url = this.path + "/member/restaurant";
          const result = await axios.get(url);
-
          const restaurant: Member = result.data;
-
          return restaurant;
-           
       } catch (err) {
          console.log("Error, getRestaurant :", err);
          throw err;
       }
    }
 
+   public async signup(input: MemberInput): Promise<Member>{
+      try {
+         const url = this.path + "/member/signup";
+         const result = await axios.post(url, input, {withCredentials: true});
+         console.log("signup:", result);
+
+         const member: Member = result.data.member;
+         console.log("member:", member);
+         localStorage.setItem("memberData", JSON.stringify(member));
+         
+         return member;
+      } catch(err){
+         console.log("Error, getRestaunt:", err);
+         throw err;
+      }
+   }
 
 }
 

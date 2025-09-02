@@ -14,26 +14,42 @@ import "../css/navbar.css";
 import "../css/footer.css";
 import Test from "./screens/Test";
 import useBasket from "./hooks/useBasket";
+import AuthenticationModal from "./components/auth";
 
 function App() {
   const location = useLocation();
 
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll, } = useBasket();
-  const [ signupOpen, setSignupOpen ] = useState<boolean>(true);
+  const [ signupOpen, setSignupOpen ] = useState<boolean>(false);
   const [loginOpen, setLoginOpen ] = useState<boolean>(false);
 
-
+  
   /** HANDLERS */
-
+ 
   const handleSignupClose = () => setSignupOpen(false);
   const handleLoginClose = () => setLoginOpen(false);
   
   return (
     <>
         {location.pathname === "/" ? (
-            <HomeNavbar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} onDelete={onDelete} onDeleteAll={onDeleteAll} />
+            <HomeNavbar 
+            cartItems={cartItems} 
+            onAdd={onAdd} 
+            onRemove={onRemove} 
+            onDelete={onDelete} 
+            onDeleteAll={onDeleteAll} 
+            setSignupOpen={setSignupOpen}
+            setLoginOpen={setLoginOpen}
+            />
           ) : (
-            <OtherNavbar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} onDelete={onDelete} onDeleteAll={onDeleteAll}/>
+            <OtherNavbar 
+            cartItems={cartItems} 
+            onAdd={onAdd} 
+            onRemove={onRemove} 
+            onDelete={onDelete} 
+            onDeleteAll={onDeleteAll}
+            setSignupOpen={setSignupOpen}
+            setLoginOpen={setLoginOpen}/>
           )}
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -57,7 +73,7 @@ function App() {
           <Footer />
 
 
-        <AuthonticationModal
+        <AuthenticationModal
           signupOpen={signupOpen}
           loginOpen={loginOpen}
           handleSignupClose={handleSignupClose}
