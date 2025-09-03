@@ -23,7 +23,7 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
   setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });
-
+// dispatch storega actionni joylaydigan function
 
 export default function HomePage() {
    /** Run qilinganda Frontga Env-Varlar yuklanadi!!! */

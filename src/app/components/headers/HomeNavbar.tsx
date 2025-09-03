@@ -16,12 +16,13 @@ interface HomeNavberProps {
    setSignupOpen: (isOpen: boolean) => void;
    setLoginOpen: (isOpen: boolean) => void;
    handleLogoutClick: (e: React.MouseEvent<HTMLElement>) => void;
-   anchorEl: HTMLElement | null;
+   anchorEl: HTMLElement | null; 
    handleCloseLogout: () => void;
    handleLogoutRequest: () => void;
 }
 
 export default function HomeNavbar(props: HomeNavberProps) {
+
    const { cartItems,
        onAdd, 
        onRemove, 
@@ -43,7 +44,7 @@ export default function HomeNavbar(props: HomeNavberProps) {
          <Stack className="menu">
             <Box>
                   <NavLink to="/">
-                     <img className="brand-logo" src="/icons/burak.svg" alt=""/>
+                     <img className="brand-logo" src="/icons/burak.svg" alt="" />
                   </NavLink>  
                </Box>
             <Stack className="links">
