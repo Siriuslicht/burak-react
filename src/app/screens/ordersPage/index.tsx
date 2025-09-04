@@ -8,7 +8,6 @@ import ProcessOrders from "./ProcessOrders";
 import FinishedOrders from "./FinishedOrders";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Divider from "../../components/divider";
-import "../../../css/order.css";
 import { Order, OrderInquiry } from "../../../lib/types/order";
 import { setFinishedOrders, setPausedOrders, setProcessOrders } from "./slice";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -16,6 +15,10 @@ import { useDispatch } from "react-redux";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/Order.service";
 import { useGlobals } from "../../hooks/useGlobals";
+import { useHistory } from "react-router-dom";
+import "../../../css/order.css";
+import { serverApi } from "../../../lib/config";
+import { MemberType } from "../../../lib/enums/member.enum";
 
 
 /** REDUX SLICE & SELECTOR */
@@ -32,7 +35,8 @@ export default function OrdersPage() {
 
   const { setPausedOrders, setProcessOrders, setFinishedOrders } = actionDispatch(useDispatch());
   const [value, setValue] = useState("1");
-  const { orderBuilder } = useGlobals();
+  const { orderBuilder, authMember} = useGlobals();
+  const history = useHistory();
   const [ orderInquiry, setOrderInquiry ] = useState<OrderInquiry>({
     page: 1,
     limit: 3,
@@ -62,6 +66,9 @@ export default function OrdersPage() {
   const handleChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  if(!authMember) history.push("/");
+
   return (
     <div className="order-page">
       <Container className="order-container">
@@ -92,18 +99,26 @@ export default function OrdersPage() {
         <Stack className={"order-right"}>
             <Stack className="user-detail">
                 <Stack className="user-image">
-                  <img className="user-img" src="/img/justin.webp" />
-                   {/* <img className="user-perspective" src="img/User_perspective_matte_s 1.png" /> */}
+                  <img className="user-img" src={ authMember?.memberImage 
+                      ? `${serverApi}/${authMember?.memberImage}`
+                      : "/icons/default-user.svg"} />
 
-                  <Box className={"user-name"}>Justin</Box>
-                  <Box className={"user-ident"}> USER</Box>
+                   <img className="user-perspective" src={authMember?.memberType 
+                                        === MemberType.RESTAURANT 
+                                       ? "/icons/restaurant.svg" 
+                                       : "/icons/user-badge.svg"} />
+
+                  <Box className={"user-name"}>{authMember?.memberNick}</Box>
+                  <Box className={"user-ident"}> {authMember?.memberType}</Box>
                 </Stack>
 
                   <Divider height="1" width="300" bg="black"/>
 
                   <Stack className="user-detail-bottom">
                     <img className="user-location-img" src="/img/location.png" />
-                    <p className="user-location-p">Seville, Russia</p>
+                    <p className="user-location-p">{authMember?.memberAddress 
+                                                    ? authMember.memberAddress 
+                                                    : "Do not exist"}</p>
                   </Stack>
             </Stack>
 
