@@ -1,10 +1,11 @@
 import { OrderStatus } from "../enums/order.enum";
+import { Product } from "./product";
 
 export interface OrderItemInput {
    productId: string;
    itemQuantity: number;
    itemPrice: number;
-   orderId: string;
+   orderId?: string;
 }
 
 export interface OrderItem {
@@ -27,6 +28,7 @@ export interface Order {
    updatedAt: Date;
    /** from aggregation */
    orderItems: OrderItem[];
+   productData: Product[];
 }
 
 export interface OrderInquiry { 

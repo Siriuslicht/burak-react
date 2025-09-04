@@ -9,10 +9,12 @@ import FinishedOrders from "./FinishedOrders";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Divider from "../../components/divider";
 import "../../../css/order.css";
-import { Order } from "../../../lib/types/order";
+import { Order, OrderInquiry } from "../../../lib/types/order";
 import { setFinishedOrders, setPausedOrders, setProcessOrders } from "./slice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import { OrderStatus } from "../../../lib/enums/order.enum";
+import OrderService from "../../services/Order.service";
 
 
 /** REDUX SLICE & SELECTOR */
@@ -27,11 +29,31 @@ const actionDispatch = (dispatch: Dispatch) => ({
 export default function OrdersPage() {
 
 
-  const { setPausedOrders, setProcessOrders, setFinishedOrders } = actionDispatch(useDispatch);
+  const { setPausedOrders, setProcessOrders, setFinishedOrders } = actionDispatch(useDispatch());
   const [value, setValue] = useState("1");
 
-  useEffect(() => {
+  const [ orderInquiry, setOrderInquiry ] = useState<OrderInquiry>({
+    page: 1,
+    limit: 3,
+    orderStatus: OrderStatus.PAUSE,
+  });
+  useEffect(() => { 
+       const order = new OrderService();
       
+       order
+        .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PAUSE})
+        .then((data) => setPausedOrders(data))
+        .catch((err)=> console.log(err));
+
+        order
+        .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PROCESS})
+        .then((data) => setProcessOrders(data))
+        .catch((err)=> console.log(err));
+       
+        order
+        .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH})
+        .then((data) => setFinishedOrders(data))
+        .catch((err)=> console.log(err));
   }, [])
 
 
